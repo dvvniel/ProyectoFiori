@@ -1,0 +1,28 @@
+<mvc:View controllerName="com.proyecto.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page id="detailPage" title="Detalle Producto" showNavButton="true" navButtonPress="onNavBack">
+
+        <content>
+            <ObjectHeader title="{product>/ProductName}" number="{product>/UnitPrice}" numberUnit="USD">
+
+                <attributes>
+                    <ObjectAttribute title="Categoría" text="{product>/Category/CategoryName}" />
+                    <ObjectAttribute title="Proveedor" text="{product>/Supplier/CompanyName}" />
+                    <ObjectAttribute title="Cantidad por Unidad" text="{product>/QuantityPerUnit}" />
+                    <ObjectAttribute title="Stock" text="{product>/UnitsInStock}" />
+                </attributes>
+
+            </ObjectHeader>
+        </content>
+
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Agregar al Carrito" icon="sap-icon://cart-3" type="Emphasized" press="onAddToCart"/>
+            </OverflowToolbar>
+        </footer>
+
+    </Page>
+</mvc:View>

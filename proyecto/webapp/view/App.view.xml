@@ -1,0 +1,28 @@
+<mvc:View controllerName="com.proyecto.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt">
+    <tnt:ToolPage id="toolPage">
+        <tnt:header>
+            <tnt:ToolHeader>
+                <Button icon="sap-icon://menu2" press="onSideNavButtonPress" />
+                <Title text="Retail Portal" level="H1" />
+                <ToolbarSpacer />
+                <Button icon="sap-icon://cart" press="onPressCart" tooltip="Ver Carrito"/>
+                <Avatar src="sap-icon://person-placeholder" displaySize="XS" press="onPressProfile" class="sapUiTinyMarginBeginEnd"/>
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation selectedKey="home" itemSelect="onItemSelect">
+                <tnt:NavigationList>
+                    <tnt:NavigationListItem key="home" text="Inicio" icon="sap-icon://home" />
+                    <tnt:NavigationListItem key="profile" text="Mi Perfil" icon="sap-icon://person-placeholder" />
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <tnt:mainContents>
+            <App id="app"/>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>

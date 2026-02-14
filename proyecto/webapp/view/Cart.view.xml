@@ -1,0 +1,37 @@
+<mvc:View controllerName="com.proyecto.controller.Cart"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page title="Carrito de Compras" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Table id="cartTable" items="{cart>/items}" noDataText="Tu carrito está vacío">
+                <columns>
+                    <Column>
+                        <Text text="Producto"/>
+                    </Column>
+                    <Column>
+                        <Text text="Categoría"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Precio"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{cart>ProductName}"/>
+                            <Text text="{cart>Category/CategoryName}"/>
+                            <ObjectNumber number="{cart>UnitPrice}" unit="USD"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Finalizar Compra" type="Emphasized" press="onPressProceed" enabled="{= ${cart>/items}.length > 0 }"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

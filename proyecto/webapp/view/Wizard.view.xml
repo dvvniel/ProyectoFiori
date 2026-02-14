@@ -1,0 +1,81 @@
+<mvc:View controllerName="com.proyecto.controller.Wizard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout">
+    <Page title="Finalizar Compra" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Wizard id="ShoppingCartWizard" complete="onWizardCompleted" finishButtonText="Finalizar Compra">
+                
+                <!-- Step 1: Personal Data -->
+                <WizardStep id="PersonalStep" title="Datos Personales" validated="false">
+                    <form:SimpleForm editable="true">
+                        <Label text="Nombre" required="true"/>
+                        <Input value="{wizard>/firstName}" liveChange="validatePersonalStep" placeholder="Tu nombre"/>
+                        
+                        <Label text="Apellido" required="true"/>
+                        <Input value="{wizard>/lastName}" liveChange="validatePersonalStep" placeholder="Tu apellido"/>
+                        
+                        <Label text="Email" required="true"/>
+                        <Input value="{wizard>/email}" type="Email" liveChange="validatePersonalStep" placeholder="ejemplo@correo.com"/>
+                        
+                        <Label text="Dirección" required="true"/>
+                        <Input value="{wizard>/address}" liveChange="validatePersonalStep" placeholder="Calle falsa 123"/>
+                    </form:SimpleForm>
+                </WizardStep>
+
+                <!-- Step 2: Payment Data -->
+                <WizardStep id="PaymentStep" title="Datos de Pago" validated="false">
+                    <form:SimpleForm editable="true">
+                        <Label text="Número de Tarjeta" required="true"/>
+                        <Input value="{wizard>/cardNumber}" liveChange="validatePaymentStep" placeholder="0000 0000 0000 0000" maxLength="16" type="Number"/>
+                        
+                        <Label text="Fecha de Expiración" required="true"/>
+                        <DatePicker value="{wizard>/cardExpiry}" change="validatePaymentStep" displayFormat="MM/yyyy" valueFormat="MM/yyyy" />
+                        
+                        <Label text="CVV" required="true"/>
+                        <Input value="{wizard>/cardCVV}" liveChange="validatePaymentStep" placeholder="123" maxLength="3" type="Number"/>
+                    </form:SimpleForm>
+                </WizardStep>
+
+                <!-- Step 3: Review -->
+                <WizardStep id="ReviewStep" title="Revisión">
+                    <Text text="Por favor revisa tus productos antes de finalizar." class="sapUiSmallMarginBottom"/>
+                    
+                    <Table items="{cart>/items}">
+                        <columns>
+                            <Column><Text text="Producto"/></Column>
+                            <Column hAlign="Center"><Text text="Cant."/></Column>
+                            <Column hAlign="End"><Text text="Precio"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{cart>ProductName}"/>
+                                    <Text text="{cart>Quantity}"/>
+                                    <ObjectNumber number="{cart>UnitPrice}" unit="USD"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+
+                    <form:SimpleForm editable="false" title="Datos Personales">
+                        <Label text="Nombre Completo"/>
+                        <Text text="{wizard>/firstName} {wizard>/lastName}"/>
+                        
+                        <Label text="Email"/>
+                        <Text text="{wizard>/email}"/>
+                        
+                        <Label text="Dirección"/>
+                        <Text text="{wizard>/address}"/>
+                        
+                        <Label text="Tarjeta"/>
+                        <Text text="**** **** **** {wizard>/cardNumberLast4}"/>
+                    </form:SimpleForm>
+                </WizardStep>
+
+            </Wizard>
+        </content>
+    </Page>
+</mvc:View>

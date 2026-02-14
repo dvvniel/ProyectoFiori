@@ -1,0 +1,61 @@
+<mvc:View controllerName="com.proyecto.controller.Profile"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Page title="Mi Perfil" showNavButton="false">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <HBox alignItems="Center" class="sapUiMediumMarginBottom">
+                    <Avatar src="sap-icon://person-placeholder" displaySize="XL" class="sapUiMediumMarginEnd"/>
+                    <VBox>
+                        <Title text="Usuario Demo" level="H1"/>
+                        <Text text="Cliente Frecuente"/>
+                    </VBox>
+                </HBox>
+
+                <form:SimpleForm title="Información Personal" editable="false" layout="ResponsiveGridLayout">
+                    <Label text="Nombre"/>
+                    <Text text="Daniel User"/>
+                    
+                    <Label text="Email"/>
+                    <Text text="daniel@example.com"/>
+                    
+                    <Label text="Teléfono"/>
+                    <Text text="+56 9 1234 5678"/>
+                    
+                    <Label text="Dirección"/>
+                    <Text text="Av. Principal 123, Santiago"/>
+                </form:SimpleForm>
+
+                <Title text="Historial de Pedidos" level="H2" class="sapUiMediumMarginTop sapUiSmallMarginBottom"/>
+                <Table noDataText="No hay pedidos recientes">
+                    <columns>
+                        <Column><Text text="ID Pedido"/></Column>
+                        <Column><Text text="Fecha"/></Column>
+                        <Column hAlign="End"><Text text="Total"/></Column>
+                        <Column hAlign="Center"><Text text="Estado"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="#10234"/>
+                                <Text text="12/02/2026"/>
+                                <ObjectNumber number="150.00" unit="USD"/>
+                                <ObjectStatus text="Entregado" state="Success"/>
+                            </cells>
+                        </ColumnListItem>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="#10235"/>
+                                <Text text="10/02/2026"/>
+                                <ObjectNumber number="85.50" unit="USD"/>
+                                <ObjectStatus text="En Camino" state="Warning"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
