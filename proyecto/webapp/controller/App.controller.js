@@ -7,6 +7,12 @@ sap.ui.define([
   return BaseController.extend("com.proyecto.controller.App", {
     onInit: function () {
       this.getOwnerComponent().getRouter().attachRouteMatched(this.onRouteMatched, this);
+      
+      // Load saved theme
+      var sTheme = localStorage.getItem("userTheme");
+      if (sTheme) {
+        sap.ui.getCore().applyTheme(sTheme);
+      }
     },
 
     onRouteMatched: function (oEvent) {
@@ -54,6 +60,14 @@ sap.ui.define([
 
     onPressProfile: function () {
       this.getOwnerComponent().getRouter().navTo("RouteProfile");
+    },
+
+    onToggleTheme: function () {
+      var sCurrentTheme = sap.ui.getCore().getConfiguration().getTheme();
+      var sNewTheme = (sCurrentTheme === "sap_horizon_dark") ? "sap_horizon" : "sap_horizon_dark";
+      
+      sap.ui.getCore().applyTheme(sNewTheme);
+      localStorage.setItem("userTheme", sNewTheme);
     },
 
     // --- Global Cart Logic ---

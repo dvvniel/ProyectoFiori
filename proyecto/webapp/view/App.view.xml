@@ -9,6 +9,7 @@
                 <Button icon="sap-icon://menu2" press="onSideNavButtonPress" />
                 <Title text="Retail Portal" level="H1" />
                 <ToolbarSpacer />
+                <Button icon="sap-icon://palette" press="onToggleTheme" tooltip="Cambiar Tema"/>
                 <Button icon="sap-icon://cart" press="onPressCart" tooltip="Ver Carrito"/>
                 <Avatar src="sap-icon://person-placeholder" displaySize="XS" press="onPressProfile" class="sapUiTinyMarginBeginEnd"/>
             </tnt:ToolHeader>
