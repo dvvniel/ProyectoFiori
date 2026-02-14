@@ -2,52 +2,38 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:p="sap.m.plugins">
+    xmlns:p="sap.m.plugins"
+    xmlns:f="sap.f"
+    xmlns:grid="sap.ui.layout.cssgrid">
     <Page id="page" title="{i18n>title}">
-        <Table id="idProductsTable" inset="false" items="{products>/results}">
-            <headerToolbar>
-                <OverflowToolbar>
-                    <content>
-                        <Title text="Products" level="H2"/>
-                        <ToolbarSpacer />
-                        <ComboBox id="idPopinLayout" placeholder="Popin layout options" change="onPopinLayoutChanged">
-                            <items>
-                                <core:Item text="Block" key="Block"/>
-                                <core:Item text="Grid Large" key="GridLarge"/>
-                                <core:Item text="Grid Small" key="GridSmall"/>
-                            </items>
-                        </ComboBox>
-                        <Label text="Sticky options:" />
-                        <CheckBox text="ColumnHeaders" select="onSelect"/>
-                        <CheckBox text="HeaderToolbar" select="onSelect"/>
-                        <CheckBox text="InfoToolbar" select="onSelect"/>
-                        <CheckBox text="InfoToolbar" select="onSelect"/>
-                        <ToggleButton id="toggleInfoToolbar" text="Hide/Show InfoToolbar" press="onToggleInfoToolbar" />
-                    </content>
-                </OverflowToolbar>
-            </headerToolbar>
-            <infoToolbar>
-                <OverflowToolbar>
-                    <Label text="Wide range of available products"/>
-                </OverflowToolbar>
-            </infoToolbar>
-            <columns>
-                <Column hAlign="Center">
-                    <Text text="Producto" />
-                </Column>
-                <Column hAlign="Center">
-                    <Text text="Categoria" />
-                </Column>
-
-            </columns>
-            <items>
-                <ColumnListItem vAlign="Middle" type="Navigation" press="onItemPress">
-                    <cells>
-                        <Text text="{products>ProductName}" />
-                        <Text text="{products>Category/CategoryName}" />
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+        <f:GridList id="idProductsGrid" items="{products>/results}">
+            <f:customLayout>
+                <grid:GridBoxLayout boxMinWidth="17rem" />
+            </f:customLayout>
+            <f:gridTemplate>
+                <f:GridListItem type="Navigation" press="onItemPress">
+                    <VBox class="sapUiSmallMargin">
+                        <layoutData>
+                            <FlexItemData growFactor="1" shrinkFactor="0" />
+                        </layoutData>
+                        <HBox justifyContent="SpaceBetween" alignItems="Start">
+                            <Title text="{products>ProductName}" wrapping="true" />
+                        </HBox>
+                        <ObjectStatus text="{= ${products>UnitsInStock} > 0 ? 'Available' : 'Out of Stock'}" state="{= ${products>UnitsInStock} > 0 ? 'Success' : 'Error'}" />
+                        <VBox alignItems="Center" class="sapUiMediumMarginTopBottom">
+                            <Image src="sap-icon://product" height="8rem" width="8rem" />
+                        </VBox>
+                        <HBox justifyContent="SpaceBetween" alignItems="Center">
+                            <Button icon="sap-icon://cart" type="Emphasized" press="onAddToCart" />
+                            <ObjectNumber number="{
+                                    parts:[{path:'products>UnitPrice'},{path:'products>CurrencyCode'}],
+                                    type: 'sap.ui.model.type.Currency',
+                                    formatOptions: {showMeasure: false}
+                                }" unit="EUR" state="Success" />
+                        </HBox>
+                    </VBox>
+                </f:GridListItem>
+            </f:gridTemplate>
+        </f:GridList>
     </Page>
 </mvc:View>

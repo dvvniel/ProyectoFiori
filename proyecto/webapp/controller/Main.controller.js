@@ -1,6 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast"
+], (Controller, MessageToast) => {
     "use strict";
 
     return Controller.extend("com.proyecto.controller.Main", {
@@ -96,8 +97,17 @@ sap.ui.define([
 
             this.onCloseCart(); // Close dialog
             this.getOwnerComponent().getRouter().navTo("RouteWizard");
-        }
+        },
 
+        onAddToCart: function (oEvent) {
+            var oButton = oEvent.getSource();
+            var oBindingContext = oButton.getBindingContext("products");
+            var oModel = oBindingContext.getModel("products");
+            var sPath = oBindingContext.getPath();
+            var oProduct = oModel.getProperty(sPath);
+
+            sap.m.MessageToast.show("Added to cart: " + oProduct.ProductName);
+        }
 
     });
 });
